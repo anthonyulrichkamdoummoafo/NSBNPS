@@ -3,11 +3,11 @@ import { motion } from 'motion/react';
 import { Image as ImageIcon, Play, ExternalLink } from 'lucide-react';
 
 const galleryItems = [
-  { id: 1, title: "Cultural Day", category: "Event", size: "col-span-2 row-span-2", img: "https://images.unsplash.com/photo-1544367350-f8fa266e7552?auto=format&fit=crop&q=80&w=800" },
-  { id: 2, title: "Science Lab", category: "Academic", img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600" },
-  { id: 3, title: "Football Match", category: "Sports", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=600" },
-  { id: 4, title: "Class Project", category: "Nursery", size: "col-span-2", img: "https://images.unsplash.com/photo-1524388658896-67704badaba1?auto=format&fit=crop&q=80&w=800" },
-  { id: 5, title: "Music Class", category: "Arts", img: "https://images.unsplash.com/photo-1514320298574-2b12e20ffda3?auto=format&fit=crop&q=80&w=600" },
+  { id: 1, title: "Excursion 2023", category: "Excursion", size: "col-span-2 row-span-2", img: "input_file_0.png" },
+  { id: 2, title: "Merry-go-round Fun", category: "Excursion", img: "input_file_1.png" },
+  { id: 3, title: "Trampoline Day", category: "Excursion", img: "input_file_2.png" },
+  { id: 4, title: "Cultural Day", category: "Event", size: "col-span-2", img: "https://images.unsplash.com/photo-1544367350-f8fa266e7552?auto=format&fit=crop&q=80&w=800" },
+  { id: 5, title: "Science Lab", category: "Academic", img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600" },
 ];
 
 export default function Gallery() {
@@ -17,10 +17,10 @@ export default function Gallery() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
            <div className="max-w-2xl">
               <span className="inline-block px-4 py-1.5 bg-green-100 text-green-700 rounded-full text-xs font-black uppercase tracking-widest mb-6">
-                School Life
+                Excursion 2023
               </span>
               <h2 className="text-5xl md:text-6xl font-black text-slate-900 leading-[1.1]">
-                 Moments of <span className="text-orange-500 italic">Joy</span> & Learning.
+                 A day our kids will <span className="text-orange-500 italic">never forget</span>.
               </h2>
            </div>
            <button className="flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-blue-600 transition-colors shadow-xl shadow-slate-200">
