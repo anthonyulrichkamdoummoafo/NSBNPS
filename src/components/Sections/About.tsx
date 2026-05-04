@@ -1,16 +1,19 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { SCHOOL_INFO } from '../../constants';
-import { Heart, Target, Sparkles } from 'lucide-react';
+import { Target, Sparkles } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function About() {
-  return (
-    <section id="about" className="py-32 px-6 relative overflow-hidden">
-      {/* African pattern inspired background deco */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-50 rounded-full blur-3xl opacity-50 -mr-48 -mt-24" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-green-50 rounded-full blur-3xl opacity-50 -ml-48 -mb-24" />
+  const { lang, t } = useLanguage();
 
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+  return (
+    <section id="about" className="py-32 px-6 relative overflow-hidden bg-white">
+      {/* African pattern inspired background deco */}
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] toghu-pattern opacity-5 -mr-48 -mt-24 rotate-12" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-cm-green rounded-full blur-3xl opacity-10 -ml-48 -mb-24" />
+
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-24 items-center">
         <motion.div
            initial={{ opacity: 0, x: -50 }}
            whileInView={{ opacity: 1, x: 0 }}
@@ -18,24 +21,22 @@ export default function About() {
            transition={{ duration: 0.8 }}
            className="relative"
         >
-          <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl">
+          <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-900 translate-x-4 translate-y-4">
              <img 
                src="https://images.unsplash.com/photo-1544367350-f8fa266e7552?auto=format&fit=crop&q=80&w=1200" 
                alt="School Activity"
                className="w-full aspect-[4/5] object-cover"
              />
-             <div className="absolute inset-0 bg-blue-900/20 mix-blend-overlay" />
           </div>
+          <div className="absolute inset-0 border-4 border-cm-yellow rounded-2xl -translate-x-4 -translate-y-4" />
           
-          <div className="absolute -bottom-10 -right-10 bg-white p-8 rounded-3xl shadow-2xl max-w-xs border border-slate-100 z-20">
-             <h4 className="text-xl font-black text-slate-900 mb-2">Madame Djoubang Desiree</h4>
-             <p className="text-sm font-bold text-blue-600 uppercase tracking-widest mb-4">Proprietress</p>
-             <p className="text-slate-600 text-sm italic leading-relaxed">
-               "Our mission is to nurture the leaders of tomorrow with discipline and bilingual excellence."
+          <div className="absolute -bottom-10 -right-4 bg-slate-900 p-8 rounded-xl shadow-2xl max-w-xs border-l-8 border-cm-red z-20">
+             <h4 className="text-xl font-serif font-black text-white mb-2">{t.about.proprietress}</h4>
+             <p className="text-sm font-bold text-cm-yellow uppercase tracking-widest mb-4">{t.about.role}</p>
+             <p className="text-slate-300 text-sm italic leading-relaxed">
+               "{t.about.quote}"
              </p>
           </div>
-          
-          <div className="absolute -top-6 -left-6 w-32 h-32 border-4 border-yellow-400 rounded-full opacity-20" />
         </motion.div>
 
         <motion.div
@@ -44,35 +45,41 @@ export default function About() {
            viewport={{ once: true }}
            transition={{ duration: 0.8 }}
         >
-          <div className="mb-8">
-            <span className="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-xs font-black uppercase tracking-widest mb-6">
-              Our Legacy
-            </span>
-            <h2 className="text-5xl md:text-6xl font-black text-slate-900 leading-[1.1] mb-8">
-              Decades of <span className="text-blue-600 italic">Bilingual</span> Brilliance.
+          <div className="mb-12">
+            <div className="flex gap-2 mb-6">
+              <div className="w-12 h-2 bg-cm-green rounded-full" />
+              <div className="w-8 h-2 bg-cm-red rounded-full" />
+              <div className="w-4 h-2 bg-cm-yellow rounded-full" />
+            </div>
+            <h2 className="text-5xl md:text-7xl font-serif font-black text-slate-900 leading-[1] mb-10">
+              {lang === 'EN' ? (
+                <>Honoring <br />Our <span className="text-cm-red">Heritage.</span></>
+              ) : (
+                <>Honorer <br />Notre <span className="text-cm-red">Héritage.</span></>
+              )}
             </h2>
-            <p className="text-xl text-slate-600 leading-relaxed max-w-xl">
-              Located in the heart of Isokolo Mokindi Village, Limbe, NSBNPS has been a beacon of quality education for children in Cameroon. We blend modern pedagogy with traditional values.
+            <p className="text-xl text-slate-700 leading-relaxed font-medium mb-12">
+              {t.about.desc}
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-8">
-             <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-200 transition-colors">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center mb-4">
-                   <Target className="w-5 h-5" />
+             <div className="p-8 bg-slate-50 rounded-2xl border-b-4 border-cm-green shadow-sm group hover:bg-cm-green hover:text-white transition-all duration-500">
+                <div className="w-12 h-12 bg-cm-green text-white rounded-xl flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-cm-green">
+                   <Target className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-slate-900 mb-2">Our Mission</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {SCHOOL_INFO.mission}
+                <h3 className="text-xl font-serif font-black mb-4">{t.about.mission_title}</h3>
+                <p className="text-sm leading-relaxed opacity-80">
+                  {lang === 'EN' ? SCHOOL_INFO.mission_en : SCHOOL_INFO.mission_fr}
                 </p>
              </div>
-             <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:border-green-200 transition-colors">
-                <div className="w-10 h-10 bg-green-600 text-white rounded-xl flex items-center justify-center mb-4">
-                   <Sparkles className="w-5 h-5" />
+             <div className="p-8 bg-slate-50 rounded-2xl border-b-4 border-cm-yellow shadow-sm group hover:bg-cm-yellow hover:text-slate-900 transition-all duration-500">
+                <div className="w-12 h-12 bg-cm-yellow text-white rounded-xl flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-cm-yellow">
+                   <Sparkles className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-slate-900 mb-2">Our Vision</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {SCHOOL_INFO.vision}
+                <h3 className="text-xl font-serif font-black mb-4">{t.about.vision_title}</h3>
+                <p className="text-sm leading-relaxed opacity-80">
+                  {lang === 'EN' ? SCHOOL_INFO.vision_en : SCHOOL_INFO.vision_fr}
                 </p>
              </div>
           </div>

@@ -8,11 +8,11 @@ import {
   Text, 
   Html,
   ContactShadows,
-  useGLTF
 } from '@react-three/drei';
 import * as THREE from 'three';
 import { motion } from 'motion/react';
 import { Navigation2, Globe, Users, BookOpen } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Building = ({ position, rotation, scale, color, label, details, onSelect }: any) => {
   const [hovered, setHovered] = useState(false);
@@ -29,9 +29,9 @@ const Building = ({ position, rotation, scale, color, label, details, onSelect }
       <mesh castShadow receiveShadow>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial 
-          color={hovered ? '#fbbf24' : color} 
-          roughness={0.3}
-          metalness={0.2}
+          color={hovered ? '#fcd116' : color} 
+          roughness={0.2}
+          metalness={0.1}
         />
       </mesh>
       
@@ -40,15 +40,15 @@ const Building = ({ position, rotation, scale, color, label, details, onSelect }
         [-0.4, 0, 0.4].map((y) => (
           <mesh position={[0.51, y, x - 0.5]} key={`win-${x}-${y}`}>
             <planeGeometry args={[0.1, 0.2]} />
-            <meshStandardMaterial color="#87ceeb" emissive="#87ceeb" emissiveIntensity={hovered ? 2 : 0.5} />
+            <meshStandardMaterial color="#333" emissive="#000" />
           </mesh>
         ))
       ))}
 
       {hovered && (
         <Html position={[0, 1.2, 0]} center>
-          <div className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-blue-100 whitespace-nowrap animate-bounce pointer-events-none">
-            <p className="text-xs font-bold text-blue-900">{label}</p>
+          <div className="bg-slate-900 border-t-4 border-cm-yellow px-4 py-2 rounded-xl shadow-2xl whitespace-nowrap animate-bounce pointer-events-none">
+            <p className="text-[10px] font-black text-white uppercase tracking-widest leading-none">{label}</p>
           </div>
         </Html>
       )}
@@ -60,13 +60,13 @@ const Tree = ({ position }: { position: [number, number, number] }) => {
   return (
     <group position={position}>
       <mesh position={[0, 0.4, 0]} castShadow>
-        <cylinderGeometry args={[0.05, 0.1, 0.8]} />
-        <meshStandardMaterial color="#5d4037" />
+        <cylinderGeometry args={[0.03, 0.08, 0.8]} />
+        <meshStandardMaterial color="#3e2723" />
       </mesh>
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+      <Float speed={3} rotationIntensity={0.2} floatIntensity={0.5}>
         <mesh position={[0, 1, 0]} castShadow>
-          <coneGeometry args={[0.4, 0.8, 8]} />
-          <meshStandardMaterial color="#2e7d32" />
+          <sphereGeometry args={[0.3, 8, 8]} />
+          <meshStandardMaterial color="#1b5e20" />
         </mesh>
       </Float>
     </group>
@@ -74,82 +74,80 @@ const Tree = ({ position }: { position: [number, number, number] }) => {
 };
 
 const Campus = ({ onSelectBuilding }: { onSelectBuilding: (info: any) => void }) => {
+  const { lang, t } = useLanguage();
+  
   return (
     <group>
-      {/* Ground */}
+      {/* Ground - Richer soil/grass */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.05, 0]} receiveShadow>
-        <planeGeometry args={[20, 20]} />
-        <meshStandardMaterial color="#a5d6a7" roughness={0.8} />
+        <planeGeometry args={[30, 30]} />
+        <meshStandardMaterial color="#2e7d32" roughness={1} />
       </mesh>
 
-      {/* Main Admin Block */}
+      {/* Main Admin Block - Red Accent */}
       <Building 
         position={[0, 0.75, -2]} 
         scale={[3, 1.5, 1.5]} 
-        color="#1d4ed8" 
-        label="Administration Block"
-        details="Offices of the Proprietress, Madame Djoubang Desiree, and the accounting department."
+        color="#ce1126" 
+        label={lang === 'EN' ? "Administration Block" : "Bâtiment Administratif"}
+        details={t.about.quote}
         onSelect={onSelectBuilding}
       />
 
-      {/* Classrooms Left */}
+      {/* Classrooms Left - Green Accent */}
       <Building 
         position={[-3, 0.5, 1]} 
         scale={[2, 1, 1.5]} 
-        color="#15803d" 
-        label="Nursery Section"
-        details="Safe and colorful spaces for our youngest learners to grow and play."
+        color="#007a5e" 
+        label={t.academics.nursery}
+        details={t.academics.nursery_desc}
         onSelect={onSelectBuilding}
       />
 
-      {/* Classrooms Right */}
+      {/* Classrooms Right - Green Accent */}
       <Building 
         position={[3, 0.5, 1]} 
         scale={[2, 1, 1.5]} 
-        color="#15803d" 
-        label="Primary Section"
-        details="Well-ventilated classrooms where children master English and French bilingual skills."
+        color="#007a5e" 
+        label={t.academics.primary}
+        details={t.academics.primary_desc}
         onSelect={onSelectBuilding}
       />
 
-      {/* Playground Area */}
+      {/* Playground Area - Volcanic Sand feel */}
       <group position={[0, 0, 3]}>
         <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-          <circleGeometry args={[2, 32]} />
-          <meshStandardMaterial color="#ffcc80" />
+          <circleGeometry args={[2.5, 32]} />
+          <meshStandardMaterial color="#424242" />
         </mesh>
-        <Tree position={[-1.5, 0, -1.5]} />
-        <Tree position={[1.5, 0, -1.5]} />
-        <Tree position={[0, 0, 1.5]} />
+        <Tree position={[-1.8, 0, -1.8]} />
+        <Tree position={[1.8, 0, -1.8]} />
+        <Tree position={[0, 0, 1.8]} />
         <Text
-          position={[0, 0.5, 0]}
+          position={[0, 0.1, 0]}
+          rotation={[-Math.PI / 2, 0, 0]}
           fontSize={0.2}
-          color="#d84315"
-          font="https://fonts.gstatic.com/s/robotoslab/v7/B0lbGU98_93vSwn50N04_j8.woff"
+          color="#fcd116"
           anchorX="center"
           anchorY="middle"
         >
-          Playground
+          {lang === 'EN' ? "Assembly Ground" : "Terrain de Rassemblement"}
         </Text>
       </group>
 
-      {/* School Bus */}
-      <Float speed={5} rotationIntensity={0.2} floatIntensity={0.2}>
+      {/* School Bus - Cameroon Yellow */}
+      <Float speed={4} rotationIntensity={0.1} floatIntensity={0.2}>
         <group position={[5, 0.3, 4]} rotation={[0, -Math.PI / 4, 0]}>
           <mesh castShadow>
-            <boxGeometry args={[1.2, 0.6, 0.6]} />
-            <meshStandardMaterial color="#fbbf24" />
+            <boxGeometry args={[1.4, 0.7, 0.7]} />
+            <meshStandardMaterial color="#fcd116" />
           </mesh>
-          <mesh position={[0.4, 0, 0.3]} castShadow>
-            <boxGeometry args={[0.2, 0.1, 0.1]} />
-            <meshStandardMaterial color="#333" />
-          </mesh>
-          <mesh position={[-0.4, -0.3, 0.3]} castShadow>
-             <cylinderGeometry args={[0.1, 0.1, 0.1]} rotation={[Math.PI/2, 0, 0]} />
+          <mesh position={[-0.4, -0.3, 0.35]} rotation={[Math.PI/2, 0, 0]} castShadow>
+             <cylinderGeometry args={[0.12, 0.12, 0.1]} />
              <meshStandardMaterial color="#000" />
           </mesh>
-          <mesh position={[0.4, -0.3, 0.3]} castShadow>
-             <cylinderGeometry args={[0.1, 0.1, 0.1]} rotation={[Math.PI/2, 0, 0]} />
+          <mesh position={[0.4, -0.3, 0.35]} rotation={[Math.PI/2, 0, 0]} castShadow>
+             <cylinderGeometry args={[0.12, 0.12, 0.1]} />
              <meshStandardMaterial color="#000" />
           </mesh>
         </group>
@@ -157,10 +155,10 @@ const Campus = ({ onSelectBuilding }: { onSelectBuilding: (info: any) => void })
 
       <ContactShadows 
         position={[0, 0, 0]} 
-        opacity={0.4} 
-        scale={20} 
-        blur={2} 
-        far={4.5} 
+        opacity={0.6} 
+        scale={25} 
+        blur={2.5} 
+        far={5} 
       />
     </group>
   );
@@ -168,75 +166,89 @@ const Campus = ({ onSelectBuilding }: { onSelectBuilding: (info: any) => void })
 
 export default function ThreeScene() {
   const [selectedInfo, setSelectedInfo] = useState<any>(null);
+  const { lang } = useLanguage();
 
   return (
-    <div className="relative w-full h-[600px] md:h-[800px] bg-slate-50 cursor-grab active:cursor-grabbing overflow-hidden rounded-3xl shadow-inner my-8 border border-slate-200">
+    <div className="relative w-full h-[600px] md:h-[900px] bg-[#fdfaf6] cursor-grab active:cursor-grabbing overflow-hidden rounded-[2.5rem] shadow-2xl my-12 border-8 border-slate-900">
       <Canvas shadows dpr={[1, 2]}>
-        <PerspectiveCamera makeDefault position={[10, 10, 10]} fov={35} />
+        <PerspectiveCamera makeDefault position={[12, 12, 12]} fov={30} />
         <OrbitControls 
           enablePan={false} 
-          maxPolarAngle={Math.PI / 2.1} 
-          minDistance={8}
-          maxDistance={15}
+          maxPolarAngle={Math.PI / 2.2} 
+          minDistance={10}
+          maxDistance={20}
           autoRotate
-          autoRotateSpeed={0.5}
+          autoRotateSpeed={0.3}
         />
         
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} castShadow />
-        <spotLight position={[-5, 10, 5]} angle={0.2} penumbra={1} intensity={1} castShadow />
-        <Environment preset="park" />
+        <ambientLight intensity={0.7} />
+        <directionalLight 
+          position={[10, 20, 10]} 
+          intensity={2} 
+          castShadow 
+          shadow-mapSize={[2048, 2048]}
+        />
+        <Environment preset="forest" />
         
         <Campus onSelectBuilding={setSelectedInfo} />
       </Canvas>
 
       {/* Campus HUD */}
-      <div className="absolute top-6 left-6 z-10 pointer-events-none">
-        <h2 className="text-2xl font-bold text-blue-900 drop-shadow-sm">Interactive Campus</h2>
-        <p className="text-blue-600/80 text-sm">Explore our Limbe grounds</p>
+      <div className="absolute top-10 left-10 z-10 pointer-events-none">
+        <h2 className="text-4xl font-serif font-black text-slate-900 leading-none">
+          {lang === 'EN' ? "The Academy" : "L'Académie"}
+        </h2>
+        <p className="text-cm-green text-sm font-black uppercase tracking-widest mt-2">
+          {lang === 'EN' ? "Isokolo Village Campus" : "Campus du Village Isokolo"}
+        </p>
       </div>
 
-      <div className="absolute bottom-6 right-6 flex flex-col gap-4 pointer-events-none">
-        <div className="bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 w-64 ring-1 ring-black/5 animate-in slide-in-from-right duration-500">
-          <h3 className="font-bold text-slate-800 flex items-center gap-2">
-            <Navigation2 className="w-4 h-4 text-blue-600" /> Guide
+      <div className="absolute bottom-10 right-10 flex flex-col gap-4 pointer-events-none">
+        <div className="bg-slate-900 p-6 rounded-2xl shadow-2xl border-l-4 border-cm-yellow w-64 ring-1 ring-black/5 animate-in slide-in-from-right duration-500">
+          <h3 className="font-serif font-black text-white flex items-center gap-2">
+            <Navigation2 className="w-4 h-4 text-cm-yellow" /> 
+            {lang === 'EN' ? "Interactive Tour" : "Visite Interactive"}
           </h3>
-          <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-            Click on buildings to learn more about our facilities. Drag to rotate the view.
+          <p className="text-[10px] text-slate-400 mt-2 uppercase font-black tracking-widest leading-loose">
+            {lang === 'EN' 
+              ? "Tap the colorful buildings to explore our standard facilities."
+              : "Appuyez sur les bâtiments colorés pour explorer nos installations."}
           </p>
         </div>
       </div>
 
       {/* Info Modal/Overlay */}
       {selectedInfo && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
+        <div className="absolute inset-0 z-50 flex items-center justify-center p-6 bg-slate-950/80 backdrop-blur-md">
           <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full relative"
+            className="bg-white p-10 rounded-[2rem] shadow-2xl max-w-md w-full relative border-t-[12px] border-cm-red"
           >
             <button 
               onClick={() => setSelectedInfo(null)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-900 transition-colors"
+              className="absolute top-6 right-6 text-slate-300 hover:text-slate-900 transition-colors"
             >
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <div className="flex items-center gap-4 mb-4">
-               <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600">
-                  <BookOpen className="w-6 h-6" />
+            <div className="flex items-center gap-4 mb-6">
+               <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center text-cm-red">
+                  <BookOpen className="w-8 h-8" />
                </div>
-               <h3 className="text-2xl font-black text-slate-900">{selectedInfo.label}</h3>
+               <h3 className="text-3xl font-serif font-black text-slate-900">{selectedInfo.label}</h3>
             </div>
-            <p className="text-slate-600 mb-6 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
-              {selectedInfo.details}
-            </p>
+            <div className="bg-slate-50 p-6 rounded-2xl border-2 border-slate-100 mb-8">
+              <p className="text-slate-700 leading-relaxed font-bold">
+                {selectedInfo.details}
+              </p>
+            </div>
             <button 
               onClick={() => setSelectedInfo(null)}
-              className="w-full bg-blue-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-blue-200 hover:bg-blue-700 active:scale-95 transition-all"
+              className="african-btn w-full flex items-center justify-center gap-2"
             >
-              Continue Exploring
+              {lang === 'EN' ? "Close Window" : "Fermer la Fenêtre"}
             </button>
           </motion.div>
         </div>

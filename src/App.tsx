@@ -18,17 +18,21 @@ import Admissions from './components/Sections/Admissions';
 import Gallery from './components/Sections/Gallery';
 import Stats from './components/Sections/Stats';
 import Contact from './components/Sections/Contact';
-import { SCHOOL_INFO } from './constants';
+import { useLanguage } from './context/LanguageContext';
 import { ArrowDown, Check } from 'lucide-react';
 
 export default function App() {
+  const { lang, t } = useLanguage();
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-blue-100 selection:text-blue-900">
       <Navbar />
 
       <main>
+        {/* Cultural Pattern Header Strip */}
+        <div className="h-4 toghu-border w-full fixed top-0 left-0 z-[110]" />
+
         {/* Hero Section */}
-        <section id="home" className="relative pt-32 pb-20 px-6 overflow-hidden">
+        <section id="home" className="relative pt-40 pb-20 px-6 overflow-hidden">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -36,50 +40,53 @@ export default function App() {
               transition={{ duration: 0.8 }}
               className="z-10"
             >
-              <div className="flex items-center gap-2 mb-8">
-                <span className="w-12 h-px bg-blue-600" />
-                <span className="text-blue-600 font-black uppercase tracking-[0.3em] text-xs">
-                  Bilingual Education Excellence
+              <div className="flex items-center gap-4 mb-8">
+                <span className="h-6 w-1.5 bg-cm-green rounded-full shadow-[0_0_10px_rgba(0,122,94,0.5)]" />
+                <span className="h-6 w-1.5 bg-cm-red rounded-full shadow-[0_0_10px_rgba(206,17,38,0.5)]" />
+                <span className="h-6 w-1.5 bg-cm-yellow rounded-full shadow-[0_0_10px_rgba(252,209,22,0.5)]" />
+                <span className="text-slate-900 font-bold uppercase tracking-[0.2em] text-xs font-sans">
+                  {t.hero.tagline}
                 </span>
               </div>
               
-              <h1 className="text-6xl md:text-8xl font-black leading-[0.95] tracking-tight text-slate-900 mb-8">
-                Standard <br />
-                <span className="text-blue-600 italic">Learning</span>, <br />
-                Limitless <span className="text-green-600">Future</span>.
+              <h1 className="text-6xl md:text-8xl font-serif font-black leading-[0.9] tracking-tight text-slate-900 mb-8">
+                {t.hero.title_part1} <br />
+                <span className="text-cm-green italic">{t.hero.title_italic}</span> <br />
+                {t.hero.title_part2}
               </h1>
 
-              <p className="text-xl text-slate-600 leading-relaxed max-w-lg mb-10">
-                Discover the New Standard in Limbe. Where discipline meets quality, and every child becomes a bilingual leader.
+              <p className="text-xl text-slate-700 leading-relaxed max-w-lg mb-10 font-medium">
+                {t.hero.desc}
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-6">
                 <a 
                   href="#admissions"
-                  className="w-full sm:w-auto bg-blue-600 text-white px-10 py-5 rounded-2xl font-black text-lg shadow-2xl shadow-blue-200 hover:bg-blue-700 hover:-translate-y-1 transition-all active:scale-95"
+                  className="african-btn w-full sm:w-auto"
                 >
-                  Enroll Your Child
+                  {t.hero.cta_primary}
                 </a>
                 <a 
                   href="#about"
-                  className="w-full sm:w-auto px-10 py-5 rounded-2xl font-black text-lg border border-slate-200 hover:bg-slate-50 transition-all flex items-center justify-center gap-2 group"
+                  className="w-full sm:w-auto px-10 py-5 rounded-xl font-black text-lg border-b-4 border-slate-900 hover:bg-slate-50 transition-all flex items-center justify-center gap-2 group"
                 >
-                  Learn More 
+                  {t.hero.cta_secondary} 
                   <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
                 </a>
               </div>
 
-              <div className="mt-16 flex items-center gap-8">
+              <div className="mt-16 flex items-center gap-8 relative">
+                 <div className="toghu-pattern absolute inset-0 opacity-10 pointer-events-none rounded-full" />
                  <div className="flex -space-x-4">
                     {[1,2,3,4].map(i => (
-                       <div key={i} className="w-12 h-12 rounded-full border-4 border-white bg-slate-200 overflow-hidden">
-                          <img src={`https://i.pravatar.cc/150?u=${i}`} alt="Student" />
+                       <div key={i} className="w-12 h-12 rounded-full border-4 border-white bg-slate-200 overflow-hidden shadow-md">
+                          <img src={`https://i.pravatar.cc/150?u=${i + 10}`} alt="Student" />
                        </div>
                     ))}
                  </div>
-                 <div>
-                    <p className="text-sm font-bold text-slate-900">450+ Active Students</p>
-                    <p className="text-xs text-slate-500 font-medium tracking-wide">Limbe's Trusted Choice</p>
+                 <div className="flex flex-col">
+                    <p className="text-sm font-black text-slate-900">{t.hero.students}</p>
+                    <p className="text-xs text-slate-500 font-bold tracking-wide">{t.hero.location}</p>
                  </div>
               </div>
             </motion.div>

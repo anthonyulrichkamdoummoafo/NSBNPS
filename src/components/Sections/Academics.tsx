@@ -1,47 +1,59 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Book, Palette, Music, Calculator, Languages, Smile } from 'lucide-react';
-
-const programs = [
-  {
-    title: "Nursery Section",
-    desc: "A warm, nurturing environment where children from ages 2.5 to 5 begin their educational journey.",
-    subjects: ["Sensory play", "Basic Numeracy", "Bilingual Songs", "Art & Creativity"],
-    icon: Smile,
-    color: "text-pink-600",
-    bg: "bg-pink-50",
-    border: "border-pink-100"
-  },
-  {
-    title: "Primary Section",
-    desc: "A robust curriculum from Class 1 to Class 6, focusing on academic rigor and character building.",
-    subjects: ["English & French", "Mathematics", "Science", "Citizenship", "ICT"],
-    icon: Calculator,
-    color: "text-blue-600",
-    bg: "bg-blue-50",
-    border: "border-blue-100"
-  }
-];
+import { Calculator, Smile, Check } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function Academics() {
+  const { lang, t } = useLanguage();
+
+  const programs = [
+    {
+      title: t.academics.nursery,
+      desc: t.academics.nursery_desc,
+      subjects: lang === 'EN' 
+        ? ["Sensory play", "Basic Numeracy", "Bilingual Songs", "Art & Creativity"]
+        : ["Jeux sensoriels", "Numératie", "Chants bilingues", "Art et Créativité"],
+      icon: Smile,
+    },
+    {
+      title: t.academics.primary,
+      desc: t.academics.primary_desc,
+      subjects: lang === 'EN'
+        ? ["English & French", "Mathematics", "Science", "Citizenship", "ICT"]
+        : ["Anglais et Français", "Mathématiques", "Sciences", "Citoyenneté", "TIC"],
+      icon: Calculator,
+    }
+  ];
+
   return (
-    <section id="academics" className="py-32 px-6 bg-slate-50 relative">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <span className="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-xs font-black uppercase tracking-widest mb-6">
-            Educational Path
-          </span>
-          <h2 className="text-5xl md:text-6xl font-black text-slate-900 leading-[1.1] mb-6">
-            Our <span className="text-green-600 italic">Bilingual</span> Curriculum.
+    <section id="academics" className="py-32 px-6 bg-[#1a1a1a] relative overflow-hidden">
+      {/* Subtle Toghu pattern for dark bg */}
+      <div className="absolute inset-0 toghu-pattern opacity-5 pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-24">
+          <div className="flex justify-center gap-1 mb-8">
+            <div className="w-8 h-2 bg-cm-green" />
+            <div className="w-8 h-2 bg-cm-red" />
+            <div className="w-8 h-2 bg-cm-yellow" />
+          </div>
+          <h2 className="text-5xl md:text-8xl font-serif font-black text-white leading-[1] mb-8">
+            {lang === 'EN' ? (
+              <>Pathways to <span className="text-cm-yellow italic">Prestige.</span></>
+            ) : (
+              <>Parcours vers le <span className="text-cm-yellow italic">Prestige.</span></>
+            )}
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            We provide a world-class education that respects both English and French systems, preparing students for a global future.
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto font-medium">
+            {t.academics.desc}
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
           {programs.map((program, idx) => {
             const Icon = program.icon;
+            const borderClass = idx === 0 ? 'border-cm-green' : 'border-cm-yellow';
+            const bgClass = idx === 0 ? 'bg-cm-green text-white' : 'bg-cm-yellow text-slate-900';
             return (
               <motion.div 
                 key={program.title}
@@ -49,21 +61,23 @@ export default function Academics() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.2 }}
-                className={`p-12 rounded-[2.5rem] bg-white border ${program.border} shadow-xl shadow-slate-200/50 group hover:-translate-y-2 transition-all duration-500`}
+                className={`p-12 rounded-3xl border-l-8 ${borderClass} ${bgClass} shadow-2xl group transition-all duration-500`}
               >
-                <div className={`w-20 h-20 ${program.bg} ${program.color} rounded-3xl flex items-center justify-center mb-10 group-hover:rotate-12 transition-transform shadow-inner`}>
+                <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
                   <Icon className="w-10 h-10" />
                 </div>
-                <h3 className="text-4xl font-black text-slate-900 mb-6">{program.title}</h3>
-                <p className="text-slate-600 text-lg mb-10 leading-relaxed">
+                <h3 className="text-4xl font-serif font-black mb-6">{program.title}</h3>
+                <p className="opacity-90 text-lg mb-10 leading-relaxed font-medium">
                   {program.desc}
                 </p>
                 <div className="space-y-4">
-                  <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Key Focus Areas</p>
-                  <div className="grid grid-cols-2 gap-4">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] mb-6 opacity-60">
+                    {lang === 'EN' ? 'Program Highlights' : 'Points Forts du Programme'}
+                  </p>
+                  <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                     {program.subjects.map(s => (
-                       <div key={s} className="flex items-center gap-3 text-slate-700 font-medium">
-                          <div className={`w-2 h-2 rounded-full ${program.bg.replace('50', '400')}`} />
+                       <div key={s} className="flex items-center gap-3 font-bold text-sm">
+                          <Check className="w-4 h-4 opacity-70" />
                           {s}
                        </div>
                     ))}
@@ -72,22 +86,6 @@ export default function Academics() {
               </motion.div>
             );
           })}
-        </div>
-
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
-           {[
-             { title: "Bilingualism", desc: "Fluent in English & French from Day 1.", icon: Languages },
-             { title: "Creativity", desc: "Music, Arts, and Expression modules.", icon: Palette },
-             { title: "Technology", desc: "Early introduction to digital literacy.", icon: Book }
-           ].map((item) => (
-             <div key={item.title} className="p-8 bg-white/50 backdrop-blur-sm rounded-3xl border border-white flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-white rounded-2xl shadow-md flex items-center justify-center text-blue-600 mb-6">
-                   <item.icon className="w-6 h-6" />
-                </div>
-                <h4 className="text-xl font-black text-slate-900 mb-2">{item.title}</h4>
-                <p className="text-sm text-slate-600">{item.desc}</p>
-             </div>
-           ))}
         </div>
       </div>
     </section>

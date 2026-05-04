@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, GraduationCap, Globe } from 'lucide-react';
-import { NAV_LINKS, SCHOOL_INFO } from '../../constants';
+import { NAV_LINKS } from '../../constants';
 import { cn } from '../../lib/utils';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [lang, setLang] = useState<'EN' | 'FR'>('EN');
+  const { lang, setLang } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,22 +29,22 @@ export default function Navbar() {
         className={cn(
           "max-w-7xl mx-auto rounded-full px-6 py-3 flex items-center justify-between transition-all duration-500",
           isScrolled 
-            ? "bg-white/70 backdrop-blur-xl shadow-lg border border-white/50" 
+            ? "bg-white/80 backdrop-blur-xl shadow-lg border border-white/50" 
             : "bg-transparent"
         )}
       >
         <a href="#home" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:scale-110 transition-transform">
-            <GraduationCap className="w-6 h-6" />
+          <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform">
+            <GraduationCap className="w-6 h-6 text-cm-yellow" />
           </div>
           <div className="flex flex-col">
             <span className={cn(
-              "font-black text-xl leading-none tracking-tight transition-colors",
+              "font-serif font-black text-xl leading-none tracking-tight transition-colors",
               isScrolled ? "text-slate-900" : "text-slate-900"
             )}>
               NSBNPS
             </span>
-            <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest leading-none mt-1">
+            <span className="text-[10px] font-black text-cm-green uppercase tracking-widest leading-none mt-1">
               Mukundi
             </span>
           </div>
@@ -53,30 +54,30 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-8">
           {NAV_LINKS.map((link) => (
             <a 
-              key={link.label} 
+              key={link.href} 
               href={link.href}
-              className="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors relative group"
+              className="text-xs font-black uppercase tracking-[0.1em] text-slate-700 hover:text-cm-red transition-colors relative group"
             >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full" />
+              {lang === 'EN' ? link.label_en : link.label_fr}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cm-red transition-all group-hover:w-full" />
             </a>
           ))}
         </div>
 
         <div className="flex items-center gap-4">
           <button 
-            onClick={() => setLang(l => l === 'EN' ? 'FR' : 'EN')}
-            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-all active:scale-95"
+            onClick={() => setLang(lang === 'EN' ? 'FR' : 'EN')}
+            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full border-2 border-slate-900 text-xs font-black text-slate-900 hover:bg-slate-900 hover:text-white transition-all active:scale-95"
           >
-            <Globe className="w-3.5 h-3.5 text-blue-500" />
+            <Globe className="w-3.5 h-3.5" />
             {lang}
           </button>
           
           <a 
             href="#admissions"
-            className="hidden md:block bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-xl shadow-slate-200 hover:bg-blue-600 transition-all active:scale-95"
+            className="hidden md:block bg-cm-red text-white px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest shadow-xl shadow-cm-red/20 hover:bg-slate-900 transition-all active:scale-95"
           >
-            Enroll Now
+            {lang === 'EN' ? 'Enroll Now' : 'S\'inscrire'}
           </a>
 
           <button 
@@ -99,30 +100,31 @@ export default function Navbar() {
           >
             {NAV_LINKS.map((link) => (
               <a 
-                key={link.label} 
+                key={link.href} 
                 href={link.href}
-                className="text-2xl font-black text-slate-900 hover:text-blue-600"
+                className="text-4xl font-serif font-black text-slate-900 hover:text-cm-red"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {link.label}
+                {lang === 'EN' ? link.label_en : link.label_fr}
               </a>
             ))}
             <div className="h-px bg-slate-100 my-2" />
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-4">
               <button 
-               onClick={() => setLang(l => l === 'EN' ? 'FR' : 'EN')}
-               className="flex items-center gap-2 text-sm font-bold text-slate-600"
+               onClick={() => setLang(lang === 'EN' ? 'FR' : 'EN')}
+               className="flex items-center gap-3 text-lg font-black text-slate-900 p-4 border-2 border-slate-900 rounded-2xl"
               >
-                <Globe className="w-4 h-4" /> Switch Language ({lang})
+                <Globe className="w-6 h-6 text-cm-green" /> 
+                {lang === 'EN' ? 'Switch to French' : 'Changer en Anglais'}
               </button>
+              <a 
+                href="#admissions"
+                className="w-full bg-cm-red text-white text-center py-5 rounded-2xl font-black text-xl shadow-xl shadow-cm-red/20"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {lang === 'EN' ? 'Start Admission' : 'Commencer l\'Inscription'}
+              </a>
             </div>
-            <a 
-              href="#admissions"
-              className="w-full bg-blue-600 text-white text-center py-4 rounded-2xl font-bold shadow-xl shadow-blue-100"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Start Admission
-            </a>
           </motion.div>
         )}
       </AnimatePresence>

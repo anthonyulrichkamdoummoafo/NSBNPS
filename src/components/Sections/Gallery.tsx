@@ -1,30 +1,64 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Image as ImageIcon, Play, ExternalLink } from 'lucide-react';
-
-const galleryItems = [
-  { id: 1, title: "Excursion 2023", category: "Excursion", size: "col-span-2 row-span-2", img: "input_file_0.png" },
-  { id: 2, title: "Merry-go-round Fun", category: "Excursion", img: "input_file_1.png" },
-  { id: 3, title: "Trampoline Day", category: "Excursion", img: "input_file_2.png" },
-  { id: 4, title: "Cultural Day", category: "Event", size: "col-span-2", img: "https://images.unsplash.com/photo-1544367350-f8fa266e7552?auto=format&fit=crop&q=80&w=800" },
-  { id: 5, title: "Science Lab", category: "Academic", img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600" },
-];
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function Gallery() {
+  const { lang } = useLanguage();
+
+  const galleryItems = [
+    { 
+      id: 1, 
+      title: lang === 'EN' ? "Excursion 2023" : "Excursion 2023", 
+      category: lang === 'EN' ? "Excursion" : "Sortie", 
+      size: "col-span-2 row-span-2", 
+      img: "input_file_0.png" 
+    },
+    { 
+      id: 2, 
+      title: lang === 'EN' ? "Merry-go-round Fun" : "Manège Amusant", 
+      category: lang === 'EN' ? "Excursion" : "Sortie", 
+      img: "input_file_1.png" 
+    },
+    { 
+      id: 3, 
+      title: lang === 'EN' ? "Trampoline Day" : "Journée Trampoline", 
+      category: lang === 'EN' ? "Excursion" : "Sortie", 
+      img: "input_file_2.png" 
+    },
+    { 
+      id: 4, 
+      title: lang === 'EN' ? "Cultural Day" : "Journée Culturelle", 
+      category: lang === 'EN' ? "Event" : "Événement", 
+      size: "col-span-2", 
+      img: "https://images.unsplash.com/photo-1544367350-f8fa266e7552?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      id: 5, 
+      title: lang === 'EN' ? "Science Lab" : "Laboratoire de Sciences", 
+      category: lang === 'EN' ? "Academic" : "Académique", 
+      img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600" 
+    },
+  ];
+
   return (
     <section id="gallery" className="py-32 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
            <div className="max-w-2xl">
-              <span className="inline-block px-4 py-1.5 bg-green-100 text-green-700 rounded-full text-xs font-black uppercase tracking-widest mb-6">
+              <span className="inline-block px-4 py-1.5 bg-slate-900 text-white rounded-full text-xs font-black uppercase tracking-widest mb-6">
                 Excursion 2023
               </span>
-              <h2 className="text-5xl md:text-6xl font-black text-slate-900 leading-[1.1]">
-                 A day our kids will <span className="text-orange-500 italic">never forget</span>.
+              <h2 className="text-5xl md:text-8xl font-serif font-black text-slate-900 leading-[0.9]">
+                 {lang === 'EN' ? (
+                   <>Memorable <br />Moments of <span className="text-cm-red italic underline decoration-cm-yellow underline-offset-8">Joy.</span></>
+                 ) : (
+                   <>Des Moments <br />de <span className="text-cm-red italic underline decoration-cm-yellow underline-offset-8">Joie</span> Mémorables.</>
+                 )}
               </h2>
            </div>
-           <button className="flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-blue-600 transition-colors shadow-xl shadow-slate-200">
-              <ImageIcon className="w-5 h-5" /> View All Photos
+           <button className="flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-cm-red transition-colors shadow-xl shadow-slate-200 uppercase text-xs tracking-widest">
+              <ImageIcon className="w-5 h-5" /> {lang === 'EN' ? 'View All Photos' : 'Voir Toutes les Photos'}
            </button>
         </div>
 
