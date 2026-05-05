@@ -34,8 +34,8 @@ export default function Navbar() {
         )}
       >
         <a href="#home" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform">
-            <GraduationCap className="w-6 h-6 text-cm-yellow" />
+          <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform overflow-hidden border-2 border-slate-900">
+            <img src="input_file_3.png" alt="NSBNPS Logo" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           </div>
           <div className="flex flex-col">
             <span className={cn(
@@ -45,7 +45,7 @@ export default function Navbar() {
               NSBNPS
             </span>
             <span className="text-[10px] font-black text-cm-green uppercase tracking-widest leading-none mt-1">
-              Mukundi
+              Mokindi
             </span>
           </div>
         </a>

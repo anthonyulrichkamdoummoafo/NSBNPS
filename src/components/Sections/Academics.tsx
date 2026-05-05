@@ -26,22 +26,22 @@ export default function Academics() {
   ];
 
   return (
-    <section id="academics" className="py-32 px-6 bg-[#1a1a1a] relative overflow-hidden">
-      {/* Subtle Toghu pattern for dark bg */}
-      <div className="absolute inset-0 toghu-pattern opacity-5 pointer-events-none" />
+    <section id="academics" className="py-32 px-6 bg-uniform-navy relative overflow-hidden">
+      {/* Subtle school plaid pattern for dark bg */}
+      <div className="absolute inset-0 uniform-plaid opacity-5 pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-24">
           <div className="flex justify-center gap-1 mb-8">
-            <div className="w-8 h-2 bg-cm-green" />
-            <div className="w-8 h-2 bg-cm-red" />
-            <div className="w-8 h-2 bg-cm-yellow" />
+            <div className="w-8 h-2 bg-uniform-navy border border-white/20" />
+            <div className="w-8 h-2 bg-uniform-red" />
+            <div className="w-8 h-2 bg-uniform-tan" />
           </div>
           <h2 className="text-5xl md:text-8xl font-serif font-black text-white leading-[1] mb-8">
             {lang === 'EN' ? (
-              <>Pathways to <span className="text-cm-yellow italic">Prestige.</span></>
+              <>Pathways to <span className="text-uniform-red italic">Prestige.</span></>
             ) : (
-              <>Parcours vers le <span className="text-cm-yellow italic">Prestige.</span></>
+              <>Parcours vers le <span className="text-uniform-red italic">Prestige.</span></>
             )}
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto font-medium">
@@ -52,8 +52,8 @@ export default function Academics() {
         <div className="grid md:grid-cols-2 gap-12">
           {programs.map((program, idx) => {
             const Icon = program.icon;
-            const borderClass = idx === 0 ? 'border-cm-green' : 'border-cm-yellow';
-            const bgClass = idx === 0 ? 'bg-cm-green text-white' : 'bg-cm-yellow text-slate-900';
+            const borderClass = idx === 0 ? 'border-uniform-red' : 'border-uniform-tan';
+            const bgClass = idx === 0 ? 'bg-uniform-red text-white' : 'bg-uniform-tan text-white';
             return (
               <motion.div 
                 key={program.title}

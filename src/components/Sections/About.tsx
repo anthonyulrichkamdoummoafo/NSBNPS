@@ -9,9 +9,9 @@ export default function About() {
 
   return (
     <section id="about" className="py-32 px-6 relative overflow-hidden bg-white">
-      {/* African pattern inspired background deco */}
-      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] toghu-pattern opacity-5 -mr-48 -mt-24 rotate-12" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-cm-green rounded-full blur-3xl opacity-10 -ml-48 -mb-24" />
+      {/* School uniform inspired background deco */}
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] uniform-plaid opacity-10 -mr-48 -mt-24 rotate-12" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-uniform-red rounded-full blur-3xl opacity-10 -ml-48 -mb-24" />
 
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-24 items-center">
         <motion.div
@@ -28,11 +28,11 @@ export default function About() {
                className="w-full aspect-[4/5] object-cover"
              />
           </div>
-          <div className="absolute inset-0 border-4 border-cm-yellow rounded-2xl -translate-x-4 -translate-y-4" />
+          <div className="absolute inset-0 border-4 border-uniform-tan rounded-2xl -translate-x-4 -translate-y-4" />
           
-          <div className="absolute -bottom-10 -right-4 bg-slate-900 p-8 rounded-xl shadow-2xl max-w-xs border-l-8 border-cm-red z-20">
+          <div className="absolute -bottom-10 -right-4 bg-uniform-navy p-8 rounded-xl shadow-2xl max-w-xs border-l-8 border-uniform-red z-20">
              <h4 className="text-xl font-serif font-black text-white mb-2">{t.about.proprietress}</h4>
-             <p className="text-sm font-bold text-cm-yellow uppercase tracking-widest mb-4">{t.about.role}</p>
+             <p className="text-sm font-bold text-uniform-tan uppercase tracking-widest mb-4">{t.about.role}</p>
              <p className="text-slate-300 text-sm italic leading-relaxed">
                "{t.about.quote}"
              </p>
@@ -53,9 +53,9 @@ export default function About() {
             </div>
             <h2 className="text-5xl md:text-7xl font-serif font-black text-slate-900 leading-[1] mb-10">
               {lang === 'EN' ? (
-                <>Honoring <br />Our <span className="text-cm-red">Heritage.</span></>
+                <>Honoring <br />Our <span className="text-uniform-red">Heritage.</span></>
               ) : (
-                <>Honorer <br />Notre <span className="text-cm-red">Héritage.</span></>
+                <>Honorer <br />Notre <span className="text-uniform-red">Héritage.</span></>
               )}
             </h2>
             <p className="text-xl text-slate-700 leading-relaxed font-medium mb-12">
@@ -64,8 +64,8 @@ export default function About() {
           </div>
 
           <div className="grid sm:grid-cols-2 gap-8">
-             <div className="p-8 bg-slate-50 rounded-2xl border-b-4 border-cm-green shadow-sm group hover:bg-cm-green hover:text-white transition-all duration-500">
-                <div className="w-12 h-12 bg-cm-green text-white rounded-xl flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-cm-green">
+             <div className="p-8 bg-slate-50 rounded-2xl border-b-4 border-uniform-navy shadow-sm group hover:bg-uniform-navy hover:text-white transition-all duration-500">
+                <div className="w-12 h-12 bg-uniform-navy text-white rounded-xl flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-uniform-navy">
                    <Target className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-serif font-black mb-4">{t.about.mission_title}</h3>
@@ -73,8 +73,8 @@ export default function About() {
                   {lang === 'EN' ? SCHOOL_INFO.mission_en : SCHOOL_INFO.mission_fr}
                 </p>
              </div>
-             <div className="p-8 bg-slate-50 rounded-2xl border-b-4 border-cm-yellow shadow-sm group hover:bg-cm-yellow hover:text-slate-900 transition-all duration-500">
-                <div className="w-12 h-12 bg-cm-yellow text-white rounded-xl flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-cm-yellow">
+             <div className="p-8 bg-slate-50 rounded-2xl border-b-4 border-uniform-tan shadow-sm group hover:bg-uniform-tan hover:text-slate-900 transition-all duration-500">
+                <div className="w-12 h-12 bg-uniform-tan text-white rounded-xl flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-uniform-tan">
                    <Sparkles className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-serif font-black mb-4">{t.about.vision_title}</h3>

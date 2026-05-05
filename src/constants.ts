@@ -1,6 +1,6 @@
 export const SCHOOL_INFO = {
-  name: "New Standard Bilingual Nursery and Primary School Mukundi",
-  shortName: "NSBNPS Mukundi",
+  name: "New Standard Bilingual Nursery and Primary School Mokindi",
+  shortName: "NSBNPS Mokindi",
   location: "Isokolo Mokindi Village, Limbe, Cameroon",
   proprietress: "Madame Djoubang Desiree",
   mission_en: "To provide quality bilingual education that fosters discipline, intellectual growth, and character development in a safe, nurturing environment rooted in Cameroonian values.",

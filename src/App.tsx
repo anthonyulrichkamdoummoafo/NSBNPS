@@ -41,9 +41,9 @@ export default function App() {
               className="z-10"
             >
               <div className="flex items-center gap-4 mb-8">
-                <span className="h-6 w-1.5 bg-cm-green rounded-full shadow-[0_0_10px_rgba(0,122,94,0.5)]" />
-                <span className="h-6 w-1.5 bg-cm-red rounded-full shadow-[0_0_10px_rgba(206,17,38,0.5)]" />
-                <span className="h-6 w-1.5 bg-cm-yellow rounded-full shadow-[0_0_10px_rgba(252,209,22,0.5)]" />
+                <span className="h-6 w-1.5 bg-uniform-navy rounded-full shadow-[0_0_10px_rgba(30,41,59,0.5)]" />
+                <span className="h-6 w-1.5 bg-uniform-red rounded-full shadow-[0_0_10px_rgba(139,26,26,0.5)]" />
+                <span className="h-6 w-1.5 bg-uniform-tan rounded-full shadow-[0_0_10px_rgba(192,160,128,0.5)]" />
                 <span className="text-slate-900 font-bold uppercase tracking-[0.2em] text-xs font-sans">
                   {t.hero.tagline}
                 </span>
@@ -51,7 +51,7 @@ export default function App() {
               
               <h1 className="text-6xl md:text-8xl font-serif font-black leading-[0.9] tracking-tight text-slate-900 mb-8">
                 {t.hero.title_part1} <br />
-                <span className="text-cm-green italic">{t.hero.title_italic}</span> <br />
+                <span className="text-uniform-red italic">{t.hero.title_italic}</span> <br />
                 {t.hero.title_part2}
               </h1>
 
@@ -76,7 +76,7 @@ export default function App() {
               </div>
 
               <div className="mt-16 flex items-center gap-8 relative">
-                 <div className="toghu-pattern absolute inset-0 opacity-10 pointer-events-none rounded-full" />
+                 <div className="uniform-plaid absolute inset-0 opacity-10 pointer-events-none rounded-full" />
                  <div className="flex -space-x-4">
                     {[1,2,3,4].map(i => (
                        <div key={i} className="w-12 h-12 rounded-full border-4 border-white bg-slate-200 overflow-hidden shadow-md">
@@ -97,10 +97,10 @@ export default function App() {
               transition={{ duration: 1, delay: 0.2 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-blue-100 rounded-[3rem] blur-3xl opacity-50 transform rotate-12 scale-90" />
+              <div className="absolute inset-0 bg-uniform-tan/30 rounded-[3rem] blur-3xl opacity-50 transform rotate-12 scale-90" />
               <Suspense fallback={
                 <div className="w-full h-[600px] flex items-center justify-center bg-slate-50 rounded-[3rem] border border-slate-100">
-                   <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+                   <div className="w-12 h-12 border-4 border-uniform-tan border-t-uniform-red rounded-full animate-spin" />
                 </div>
               }>
                 <ThreeScene />

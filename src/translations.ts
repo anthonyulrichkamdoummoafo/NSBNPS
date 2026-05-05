@@ -3,11 +3,11 @@ export type Language = 'EN' | 'FR';
 export const TRANSLATIONS = {
   EN: {
     hero: {
-      tagline: "Bilingual Education Excellence",
+      tagline: "Aspiring for Excellence",
       title_part1: "Quality",
       title_italic: "Bilingual",
       title_part2: "Education.",
-      desc: "Rooted in Cameroonian culture, focused on global excellence. NSBNPS Mukundi prepares children for a world of possibilities through discipline and quality teaching.",
+      desc: "Rooted in Cameroonian culture, focused on global excellence. NSBNPS Mokindi prepares children for a world of possibilities through discipline and quality teaching.",
       cta_primary: "Join Our Family",
       cta_secondary: "Learn More",
       students: "450+ Proud Students",
@@ -57,11 +57,11 @@ export const TRANSLATIONS = {
   },
   FR: {
     hero: {
-      tagline: "Excellence de l'Éducation Bilingue",
+      tagline: "L'Aspiration à l'Excellence",
       title_part1: "Éducation",
       title_italic: "Bilingue",
       title_part2: "de Qualité.",
-      desc: "Enraciné dans la culture camerounaise, tourné vers l'excellence mondiale. NSBNPS Mukundi prépare les enfants à un monde de possibilités grâce à la discipline et à un enseignement de qualité.",
+      desc: "Enraciné dans la culture camerounaise, tourné vers l'excellence mondiale. NSBNPS Mokindi prépare les enfants à un monde de possibilités grâce à la discipline et à un enseignement de qualité.",
       cta_primary: "Rejoignez Notre Famille",
       cta_secondary: "En Savoir Plus",
       students: "Plus de 450 Éleves Fiers",

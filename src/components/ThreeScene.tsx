@@ -29,7 +29,7 @@ const Building = ({ position, rotation, scale, color, label, details, onSelect }
       <mesh castShadow receiveShadow>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial 
-          color={hovered ? '#fcd116' : color} 
+          color={hovered ? '#c0a080' : color} 
           roughness={0.2}
           metalness={0.1}
         />
@@ -47,7 +47,7 @@ const Building = ({ position, rotation, scale, color, label, details, onSelect }
 
       {hovered && (
         <Html position={[0, 1.2, 0]} center>
-          <div className="bg-slate-900 border-t-4 border-cm-yellow px-4 py-2 rounded-xl shadow-2xl whitespace-nowrap animate-bounce pointer-events-none">
+          <div className="bg-slate-900 border-t-4 border-uniform-red px-4 py-2 rounded-xl shadow-2xl whitespace-nowrap animate-bounce pointer-events-none">
             <p className="text-[10px] font-black text-white uppercase tracking-widest leading-none">{label}</p>
           </div>
         </Html>
@@ -88,27 +88,27 @@ const Campus = ({ onSelectBuilding }: { onSelectBuilding: (info: any) => void })
       <Building 
         position={[0, 0.75, -2]} 
         scale={[3, 1.5, 1.5]} 
-        color="#ce1126" 
+        color="#8b1a1a" 
         label={lang === 'EN' ? "Administration Block" : "Bâtiment Administratif"}
         details={t.about.quote}
         onSelect={onSelectBuilding}
       />
 
-      {/* Classrooms Left - Green Accent */}
+      {/* Classrooms Left - Navy Accent */}
       <Building 
         position={[-3, 0.5, 1]} 
         scale={[2, 1, 1.5]} 
-        color="#007a5e" 
+        color="#1e293b" 
         label={t.academics.nursery}
         details={t.academics.nursery_desc}
         onSelect={onSelectBuilding}
       />
 
-      {/* Classrooms Right - Green Accent */}
+      {/* Classrooms Right - Navy Accent */}
       <Building 
         position={[3, 0.5, 1]} 
         scale={[2, 1, 1.5]} 
-        color="#007a5e" 
+        color="#1e293b" 
         label={t.academics.primary}
         details={t.academics.primary_desc}
         onSelect={onSelectBuilding}
@@ -198,15 +198,15 @@ export default function ThreeScene() {
         <h2 className="text-4xl font-serif font-black text-slate-900 leading-none">
           {lang === 'EN' ? "The Academy" : "L'Académie"}
         </h2>
-        <p className="text-cm-green text-sm font-black uppercase tracking-widest mt-2">
+        <p className="text-uniform-red text-sm font-black uppercase tracking-widest mt-2">
           {lang === 'EN' ? "Isokolo Village Campus" : "Campus du Village Isokolo"}
         </p>
       </div>
 
       <div className="absolute bottom-10 right-10 flex flex-col gap-4 pointer-events-none">
-        <div className="bg-slate-900 p-6 rounded-2xl shadow-2xl border-l-4 border-cm-yellow w-64 ring-1 ring-black/5 animate-in slide-in-from-right duration-500">
+        <div className="bg-slate-900 p-6 rounded-2xl shadow-2xl border-l-4 border-uniform-red w-64 ring-1 ring-black/5 animate-in slide-in-from-right duration-500">
           <h3 className="font-serif font-black text-white flex items-center gap-2">
-            <Navigation2 className="w-4 h-4 text-cm-yellow" /> 
+            <Navigation2 className="w-4 h-4 text-uniform-red" /> 
             {lang === 'EN' ? "Interactive Tour" : "Visite Interactive"}
           </h3>
           <p className="text-[10px] text-slate-400 mt-2 uppercase font-black tracking-widest leading-loose">
@@ -223,7 +223,7 @@ export default function ThreeScene() {
           <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white p-10 rounded-[2rem] shadow-2xl max-w-md w-full relative border-t-[12px] border-cm-red"
+            className="bg-white p-10 rounded-[2rem] shadow-2xl max-w-md w-full relative border-t-[12px] border-uniform-red"
           >
             <button 
               onClick={() => setSelectedInfo(null)}
@@ -234,7 +234,7 @@ export default function ThreeScene() {
               </svg>
             </button>
             <div className="flex items-center gap-4 mb-6">
-               <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center text-cm-red">
+               <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center text-uniform-red">
                   <BookOpen className="w-8 h-8" />
                </div>
                <h3 className="text-3xl font-serif font-black text-slate-900">{selectedInfo.label}</h3>

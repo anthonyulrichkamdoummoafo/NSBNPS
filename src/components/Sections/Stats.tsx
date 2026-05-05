@@ -11,19 +11,19 @@ export default function Stats() {
       label: lang === 'EN' ? "Active Students" : "Éleves Actifs", 
       value: "450+", 
       icon: Users, 
-      color: "bg-cm-green text-white" 
+      color: "bg-uniform-navy text-white" 
     },
     { 
       label: lang === 'EN' ? "Bilingual Staff" : "Personnel Bilingue", 
       value: "32", 
       icon: Globe, 
-      color: "bg-cm-red text-white" 
+      color: "bg-uniform-red text-white" 
     },
     { 
       label: lang === 'EN' ? "Success Rate" : "Taux de Réussite", 
       value: "98%", 
       icon: Award, 
-      color: "bg-cm-yellow text-slate-900" 
+      color: "bg-uniform-tan text-white" 
     },
     { 
       label: lang === 'EN' ? "Years of Excellence" : "Années d'Excellence", 
