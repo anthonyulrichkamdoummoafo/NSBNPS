@@ -1,0 +1,139 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { Suspense } from 'react';
+import { motion } from 'motion/react';
+import Navbar from './components/Layout/Navbar';
+import ThreeScene from './components/ThreeScene';
+import About from './components/Sections/About';
+import Academics from './components/Sections/Academics';
+import Admissions from './components/Sections/Admissions';
+import Gallery from './components/Sections/Gallery';
+import Stats from './components/Sections/Stats';
+import Contact from './components/Sections/Contact';
+import { useLanguage } from './context/LanguageContext';
+import { ArrowDown, Check } from 'lucide-react';
+
+export default function App() {
+  const { lang, t } = useLanguage();
+  return (
+    <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-blue-100 selection:text-blue-900">
+      <Navbar />
+
+      <main>
+        {/* Cultural Pattern Header Strip */}
+        <div className="h-4 toghu-border w-full fixed top-0 left-0 z-[110]" />
+
+        {/* Hero Section */}
+        <section id="home" className="relative pt-40 pb-20 px-6 overflow-hidden">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="z-10"
+            >
+              <div className="flex items-center gap-4 mb-8">
+                <span className="h-6 w-1.5 bg-uniform-navy rounded-full shadow-[0_0_10px_rgba(30,41,59,0.5)]" />
+                <span className="h-6 w-1.5 bg-uniform-red rounded-full shadow-[0_0_10px_rgba(139,26,26,0.5)]" />
+                <span className="h-6 w-1.5 bg-uniform-tan rounded-full shadow-[0_0_10px_rgba(192,160,128,0.5)]" />
+                <span className="text-slate-900 font-bold uppercase tracking-[0.2em] text-xs font-sans">
+                  {t.hero.tagline}
+                </span>
+              </div>
+              
+              <h1 className="text-6xl md:text-8xl font-serif font-black leading-[0.9] tracking-tight text-slate-900 mb-8">
+                {t.hero.title_part1} <br />
+                <span className="text-uniform-red italic">{t.hero.title_italic}</span> <br />
+                {t.hero.title_part2}
+              </h1>
+
+              <p className="text-xl text-slate-700 leading-relaxed max-w-lg mb-10 font-medium">
+                {t.hero.desc}
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <a 
+                  href="#admissions"
+                  className="african-btn w-full sm:w-auto"
+                >
+                  {t.hero.cta_primary}
+                </a>
+                <a 
+                  href="#about"
+                  className="w-full sm:w-auto px-10 py-5 rounded-xl font-black text-lg border-b-4 border-slate-900 hover:bg-slate-50 transition-all flex items-center justify-center gap-2 group"
+                >
+                  {t.hero.cta_secondary} 
+                  <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+                </a>
+              </div>
+
+              <div className="mt-16 flex items-center gap-8 relative">
+                 <div className="uniform-plaid absolute inset-0 opacity-10 pointer-events-none rounded-full" />
+                 <div className="flex -space-x-4">
+                    {["fun1.jpg", "fun2.jpg", "fun3.jpg", "fun4.jpg"].map((img, i) => (
+                       <div key={i} className="w-12 h-12 rounded-full border-4 border-white bg-slate-200 overflow-hidden shadow-md">
+                          <img src={img} alt="Student" className="w-full h-full object-cover" />
+                       </div>
+                    ))}
+                 </div>
+                 <div className="flex flex-col">
+                    <p className="text-sm font-black text-slate-900">{t.hero.students}</p>
+                    <p className="text-xs text-slate-500 font-bold tracking-wide">{t.hero.location}</p>
+                 </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="absolute inset-0 bg-uniform-tan/30 rounded-[3rem] blur-3xl opacity-50 transform rotate-12 scale-90" />
+              <Suspense fallback={
+                <div className="w-full h-[600px] flex items-center justify-center bg-slate-50 rounded-[3rem] border border-slate-100">
+                   <div className="w-12 h-12 border-4 border-uniform-tan border-t-uniform-red rounded-full animate-spin" />
+                </div>
+              }>
+                <ThreeScene />
+              </Suspense>
+            </motion.div>
+          </div>
+        </section>
+
+        <Stats />
+        <About />
+        <Academics />
+        <Admissions />
+        <Gallery />
+        <Contact />
+      </main>
+
+      {/* Trust Badge Floating */}
+      <div className="fixed bottom-8 left-8 z-[100] hidden lg:block pointer-events-none">
+         <motion.div 
+           initial={{ x: -100, opacity: 0 }}
+           animate={{ x: 0, opacity: 1 }}
+           className="bg-white p-4 rounded-2xl shadow-2xl border border-slate-100 flex items-center gap-4 group pointer-events-auto cursor-pointer active:scale-95 transition-all"
+         >
+            <div className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center text-white">
+               <Check className="w-6 h-6" />
+            </div>
+            <div>
+               <p className="text-[10px] font-black text-green-600 uppercase tracking-widest">Quality Verified</p>
+               <p className="text-xs font-bold text-slate-900">Ministry Approved</p>
+            </div>
+         </motion.div>
+      </div>
+    </div>
+  );
+}
+
