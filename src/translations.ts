@@ -19,7 +19,7 @@ export const TRANSLATIONS = {
       desc: "Deep in Isokolo Mokindi Village, Limbe, we've built more than a school; we've built a community. Since our founding, we've remained dedicated to the Cameroonian values of respect and hard work.",
       mission_title: "Our Mission",
       vision_title: "Our Vision",
-      proprietress: "Madame Djoubang Desiree",
+      proprietress: "Madame Moafo",
       role: "Proprietress",
       quote: "Nurturing the future of Cameroon through bilingual excellence and deep-rooted discipline."
     },
@@ -73,7 +73,7 @@ export const TRANSLATIONS = {
       desc: "Au cœur du village Isokolo Mokindi, Limbe, nous avons construit plus qu'une école ; nous avons bâti une communauté. Depuis notre fondation, nous restons dévoués aux valeurs camerounaises de respect et de travail acharné.",
       mission_title: "Notre Mission",
       vision_title: "Notre Vision",
-      proprietress: "Madame Djoubang Desiree",
+      proprietress: "Madame Moafo",
       role: "Fondatrice",
       quote: "Cultiver l'avenir du Cameroun grâce à l'excellence bilingue et à une discipline profondément ancrée."
     },
