@@ -200,6 +200,23 @@ export default function ThreeScene() {
   const [retryCount, setRetryCount] = useState(0);
   const { lang } = useLanguage();
 
+  // WebGL/Canvas cannot initialize during build-time prerendering (no GPU/DOM in Node).
+  // Render a static, crawler-friendly placeholder there instead; the real 3D scene
+  // still mounts normally for actual browser visitors.
+  if (import.meta.env.SSR) {
+    return (
+      <div
+        className="w-full h-[600px] flex items-center justify-center bg-slate-50 rounded-[3rem] border border-slate-100"
+        role="img"
+        aria-label={lang === 'EN' ? 'Interactive 3D tour of the Isokolo Village campus' : 'Visite 3D interactive du campus du village Isokolo'}
+      >
+        <p className="text-slate-400 text-sm font-bold uppercase tracking-widest">
+          {lang === 'EN' ? 'Interactive Campus Tour' : 'Visite Interactive du Campus'}
+        </p>
+      </div>
+    );
+  }
+
   useEffect(() => {
     return () => {
       // forces GL context release on unmount
