@@ -23,7 +23,7 @@ export default function About() {
         >
           <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-900 translate-x-4 translate-y-4">
              <img 
-               src="graduate.png" 
+               src="graduate.jpg" 
                alt="School Activity"
                className="w-full h-96 object-cover"
              />

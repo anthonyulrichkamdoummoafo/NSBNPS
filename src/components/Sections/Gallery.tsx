@@ -31,7 +31,7 @@ export default function Gallery() {
       title: lang === 'EN' ? "Christmas Party 2021" : "Journée Culturelle 2021", 
       category: lang === 'EN' ? "Event" : "Événement", 
       size: "col-span-2", 
-      img: "christ.png" 
+      img: "christ.jpg" 
     },
     { 
       id: 5, 
