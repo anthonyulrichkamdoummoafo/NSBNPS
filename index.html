@@ -4,6 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NSBNPS</title>
+    <script>
+      // Consent Mode v2 defaults: deny everything until the visitor explicitly
+      // accepts (see src/context/ConsentContext.tsx + CookieConsentBanner.tsx).
+      // Set here, before any other script, so it applies even if a tag somehow
+      // fires before React mounts.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = window.gtag || gtag;
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500,
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>

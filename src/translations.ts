@@ -53,6 +53,11 @@ export const TRANSLATIONS = {
       form_name: "Your Name",
       form_msg: "How can we help you?",
       form_submit: "Submit Message",
+    },
+    cookieConsent: {
+      message: "We use analytics cookies to see how the site is used. They stay off until you accept.",
+      accept: "Accept",
+      reject: "Reject"
     }
   },
   FR: {
@@ -107,6 +112,11 @@ export const TRANSLATIONS = {
       form_name: "Votre Nom",
       form_msg: "Comment pouvons-nous vous aider ?",
       form_submit: "Envoyer le Message",
+    },
+    cookieConsent: {
+      message: "Nous utilisons des cookies analytiques pour comprendre l'utilisation du site. Ils restent désactivés jusqu'à votre accord.",
+      accept: "Accepter",
+      reject: "Refuser"
     }
   }
 };
