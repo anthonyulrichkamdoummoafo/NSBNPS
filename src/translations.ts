@@ -53,6 +53,9 @@ export const TRANSLATIONS = {
       form_name: "Your Name",
       form_msg: "How can we help you?",
       form_submit: "Submit Message",
+      success_title: "Message Sent!",
+      success_desc: "Thank you for reaching out. We'll get back to you shortly.",
+      error_desc: "Something went wrong sending your message. Please try again, or call us directly."
     },
     cookieConsent: {
       message: "We use analytics cookies to see how the site is used. They stay off until you accept.",
@@ -112,6 +115,9 @@ export const TRANSLATIONS = {
       form_name: "Votre Nom",
       form_msg: "Comment pouvons-nous vous aider ?",
       form_submit: "Envoyer le Message",
+      success_title: "Message Envoyé !",
+      success_desc: "Merci de nous avoir contactés. Nous vous répondrons sous peu.",
+      error_desc: "Une erreur s'est produite lors de l'envoi. Veuillez réessayer, ou appelez-nous directement."
     },
     cookieConsent: {
       message: "Nous utilisons des cookies analytiques pour comprendre l'utilisation du site. Ils restent désactivés jusqu'à votre accord.",

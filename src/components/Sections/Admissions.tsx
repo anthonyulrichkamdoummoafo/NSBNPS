@@ -1,18 +1,34 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle, Send, MapPin, ClipboardList } from 'lucide-react';
+import { CheckCircle, Send, MapPin, ClipboardList, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
+import { sendAdmissionsApplication } from '../../lib/email';
+import { analytics } from '../../lib/analytics';
 
 export default function Admissions() {
-  const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const { lang, t } = useLanguage();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormState('submitting');
-    setTimeout(() => {
+    const data = new FormData(e.currentTarget);
+    try {
+      await sendAdmissionsApplication({
+        student_name: String(data.get('student_name') || ''),
+        target_grade: String(data.get('target_grade') || ''),
+        parent_name: String(data.get('parent_name') || ''),
+        phone: String(data.get('phone') || ''),
+        email: String(data.get('email') || ''),
+        additional_info: String(data.get('additional_info') || ''),
+      });
       setFormState('success');
-    }, 1500);
+      analytics.trackFormSubmission('admissions_form', true);
+    } catch (err) {
+      console.error('Admissions form submission failed:', err);
+      setFormState('error');
+      analytics.trackFormSubmission('admissions_form', false);
+    }
   };
 
   const steps = [
@@ -108,11 +124,11 @@ export default function Admissions() {
                       <div className="grid md:grid-cols-2 gap-6">
                          <div className="space-y-2">
                            <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_student}</label>
-                           <input required type="text" placeholder={lang === 'EN' ? "Full legal name" : "Nom complet"} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
+                           <input name="student_name" required type="text" placeholder={lang === 'EN' ? "Full legal name" : "Nom complet"} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
                          </div>
                          <div className="space-y-2">
                            <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_grade}</label>
-                           <select className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium appearance-none">
+                           <select name="target_grade" className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium appearance-none">
                               <option className="text-slate-900">Nursery 1 / Maternelle 1</option>
                               <option className="text-slate-900">Nursery 2 / Maternelle 2</option>
                               <option className="text-slate-900">Class 1 / SIL</option>
@@ -127,24 +143,33 @@ export default function Admissions() {
 
                       <div className="space-y-2">
                         <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_parent}</label>
-                        <input required type="text" placeholder={lang === 'EN' ? "First and last name" : "Prénom et nom"} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
+                        <input name="parent_name" required type="text" placeholder={lang === 'EN' ? "First and last name" : "Prénom et nom"} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
                       </div>
 
                       <div className="grid md:grid-cols-2 gap-6">
                          <div className="space-y-2">
                            <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_phone}</label>
-                           <input required type="tel" placeholder="+237 ..." className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
+                           <input name="phone" required type="tel" placeholder="+237 ..." className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
                          </div>
                          <div className="space-y-2">
                            <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_email}</label>
-                           <input type="email" placeholder="email@example.com" className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
+                           <input name="email" type="email" placeholder="email@example.com" className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
                          </div>
                       </div>
 
                       <div className="space-y-2">
                         <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_info}</label>
-                        <textarea rows={3} placeholder={lang === 'EN' ? "Tell us about your child's needs..." : "Parlez-nous des besoins de votre enfant..."} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
+                        <textarea name="additional_info" rows={3} placeholder={lang === 'EN' ? "Tell us about your child's needs..." : "Parlez-nous des besoins de votre enfant..."} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
                       </div>
+
+                      {formState === 'error' && (
+                        <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-200 text-sm font-medium">
+                          <AlertCircle className="w-5 h-5 shrink-0" />
+                          {lang === 'EN'
+                            ? "Something went wrong sending your application. Please try again, or call us directly."
+                            : "Une erreur s'est produite lors de l'envoi. Veuillez réessayer, ou appelez-nous directement."}
+                        </div>
+                      )}
 
                       <button 
                         disabled={formState === 'submitting'}

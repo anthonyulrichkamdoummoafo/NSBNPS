@@ -1,11 +1,34 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { Phone, MapPin, Facebook, Twitter, Instagram, ArrowUpRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Phone, MapPin, Facebook, Twitter, Instagram, ArrowUpRight, CheckCircle, AlertCircle } from 'lucide-react';
 import { SCHOOL_INFO, NAV_LINKS } from '../../constants';
 import { useLanguage } from '../../context/LanguageContext';
+import { sendContactMessage } from '../../lib/email';
+import { analytics } from '../../lib/analytics';
 
 export default function Contact() {
   const { lang, t } = useLanguage();
+  const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormState('submitting');
+    const data = new FormData(e.currentTarget);
+    try {
+      await sendContactMessage({
+        name: String(data.get('name') || ''),
+        email: String(data.get('email') || ''),
+        subject: String(data.get('subject') || ''),
+        message: String(data.get('message') || ''),
+      });
+      setFormState('success');
+      analytics.trackFormSubmission('contact_form', true);
+    } catch (err) {
+      console.error('Contact form submission failed:', err);
+      setFormState('error');
+      analytics.trackFormSubmission('contact_form', false);
+    }
+  };
 
   return (
     <footer id="contact" className="bg-uniform-navy pt-32 pb-12 px-6 overflow-hidden relative" style={{ color: '#0f1a2b' }}>
@@ -62,18 +85,53 @@ export default function Contact() {
 
           <div className="bg-white/5 rounded-3xl p-10 md:p-16 border border-white/10 backdrop-blur-md relative overflow-hidden group">
              <div className="absolute top-0 right-0 w-32 h-32 uniform-plaid opacity-10 -mr-16 -mt-16 group-hover:rotate-45 transition-transform duration-1000 pointer-events-none" />
-             <h4 className="text-2xl font-serif font-black text-white mb-8">{t.contact.form_title}</h4>
-             <form className="space-y-6 relative z-10">
-                <div className="grid md:grid-cols-2 gap-6">
-                   <input type="text" placeholder={t.contact.form_name} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
-                   <input type="email" placeholder="Email" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
-                </div>
-                <input type="text" placeholder={lang === 'EN' ? "Subject" : "Sujet"} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
-                <textarea rows={4} placeholder={t.contact.form_msg} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
-                <button className="w-full bg-uniform-red text-white font-black py-5 rounded-xl flex items-center justify-center gap-3 hover:bg-white hover:text-slate-900 transition-all shadow-xl shadow-uniform-red/10">
-                   {t.contact.form_submit} <ArrowUpRight className="w-5 h-5" />
-                </button>
-             </form>
+             <AnimatePresence mode="wait">
+               {formState === 'success' ? (
+                 <motion.div
+                   key="success"
+                   initial={{ scale: 0.95, opacity: 0 }}
+                   animate={{ scale: 1, opacity: 1 }}
+                   className="text-center py-12 relative z-10"
+                 >
+                   <div className="w-20 h-20 bg-uniform-red/20 text-uniform-red rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                     <CheckCircle className="w-10 h-10" />
+                   </div>
+                   <h4 className="text-2xl font-serif font-black text-white mb-3">{t.contact.success_title}</h4>
+                   <p className="text-slate-400 font-medium mb-6">{t.contact.success_desc}</p>
+                   <button onClick={() => setFormState('idle')} className="african-btn px-6 py-3 text-sm">
+                     {lang === 'EN' ? 'Send Another' : 'Envoyer un Autre'}
+                   </button>
+                 </motion.div>
+               ) : (
+                 <motion.form key="form" onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                    <h4 className="text-2xl font-serif font-black text-white mb-8">{t.contact.form_title}</h4>
+                    <div className="grid md:grid-cols-2 gap-6">
+                       <input name="name" required type="text" placeholder={t.contact.form_name} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
+                       <input name="email" required type="email" placeholder="Email" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
+                    </div>
+                    <input name="subject" type="text" placeholder={lang === 'EN' ? "Subject" : "Sujet"} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
+                    <textarea name="message" required rows={4} placeholder={t.contact.form_msg} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
+
+                    {formState === 'error' && (
+                      <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-200 text-sm font-medium">
+                        <AlertCircle className="w-5 h-5 shrink-0" />
+                        {t.contact.error_desc}
+                      </div>
+                    )}
+
+                    <button
+                      disabled={formState === 'submitting'}
+                      className="w-full bg-uniform-red text-white font-black py-5 rounded-xl flex items-center justify-center gap-3 hover:bg-white hover:text-slate-900 transition-all shadow-xl shadow-uniform-red/10 disabled:opacity-70"
+                    >
+                      {formState === 'submitting' ? (
+                        <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      ) : (
+                        <>{t.contact.form_submit} <ArrowUpRight className="w-5 h-5" /></>
+                      )}
+                    </button>
+                 </motion.form>
+               )}
+             </AnimatePresence>
           </div>
         </div>
 
