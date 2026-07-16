@@ -34,23 +34,39 @@ export function renderHead(): string {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'School',
-    name: SCHOOL_INFO.name,
-    alternateName: SCHOOL_INFO.shortName,
-    description: SCHOOL_INFO.mission_en,
-    url: SITE_URL,
-    telephone: SCHOOL_INFO.contact.phone[0],
-    email: SCHOOL_INFO.contact.email,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Isokolo Mokindi Village',
-      addressLocality: 'Limbe',
-      addressCountry: 'CM',
-    },
-    founder: {
-      '@type': 'Person',
-      name: SCHOOL_INFO.proprietress,
-    },
+    '@graph': [
+      {
+        '@type': 'School',
+        '@id': `${SITE_URL}/#school`,
+        name: SCHOOL_INFO.name,
+        alternateName: SCHOOL_INFO.shortName,
+        description: SCHOOL_INFO.mission_en,
+        url: SITE_URL,
+        telephone: SCHOOL_INFO.contact.phone[0],
+        email: SCHOOL_INFO.contact.email,
+        image: ogImage,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Isokolo Mokindi Village',
+          addressLocality: 'Limbe',
+          addressCountry: 'CM',
+        },
+        founder: {
+          '@type': 'Person',
+          name: SCHOOL_INFO.proprietress,
+        },
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        name: SCHOOL_INFO.shortName,
+        url: SITE_URL,
+        description,
+        inLanguage: ['en', 'fr'],
+        publisher: { '@id': `${SITE_URL}/#school` },
+        // No SearchAction: the site has no working search functionality.
+      },
+    ],
   };
 
   return `
@@ -77,6 +93,10 @@ export function renderHead(): string {
 const DEFAULT_HEAD_PATTERNS: RegExp[] = [
   /<title>[^<]*<\/title>/i,
   /<meta\s+name="description"[^>]*>/i,
+  /<link\s+rel="canonical"[^>]*>/i,
+  /<meta\s+property="og:[^"]*"[^>]*>/gi,
+  /<meta\s+name="twitter:[^"]*"[^>]*>/gi,
+  /<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/gi,
 ];
 
 /** Pure function: inject rendered head/body into the built index.html template. */
