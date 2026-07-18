@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Users, BookOpen, Award, Globe } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
+import AnimatedCounter from '../AnimatedCounter';
 
 export default function Stats() {
   const { lang } = useLanguage();
@@ -9,25 +10,29 @@ export default function Stats() {
   const stats = [
     { 
       label: lang === 'EN' ? "Active Students" : "Éleves Actifs", 
-      value: "450+", 
+      target: 450,
+      suffix: "+",
       icon: Users, 
       color: "bg-uniform-navy text-white" 
     },
     { 
       label: lang === 'EN' ? "Bilingual Staff" : "Personnel Bilingue", 
-      value: "32", 
+      target: 32,
+      suffix: "",
       icon: Globe, 
       color: "bg-uniform-red text-white" 
     },
     { 
       label: lang === 'EN' ? "Success Rate" : "Taux de Réussite", 
-      value: "98%", 
+      target: 98,
+      suffix: "%",
       icon: Award, 
       color: "bg-uniform-tan text-white" 
     },
     { 
       label: lang === 'EN' ? "Years of Excellence" : "Années d'Excellence", 
-      value: "15+", 
+      target: 15,
+      suffix: "+",
       icon: BookOpen, 
       color: "bg-slate-900 text-white" 
     },
@@ -51,7 +56,9 @@ export default function Stats() {
                 <div className={`w-20 h-20 ${stat.color} rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-xl shadow-current/10`}>
                   <Icon className="w-8 h-8" />
                 </div>
-                <h3 className="text-4xl font-serif font-black text-slate-900 mb-2 leading-none">{stat.value}</h3>
+                <h3 className="text-4xl font-serif font-black text-slate-900 mb-2 leading-none">
+                  <AnimatedCounter target={stat.target} suffix={stat.suffix} />
+                </h3>
                 <p className="text-xs font-black text-slate-500 uppercase tracking-widest leading-none mt-2">{stat.label}</p>
               </motion.div>
             );

@@ -66,6 +66,63 @@ export function renderHead(): string {
         publisher: { '@id': `${SITE_URL}/#school` },
         // No SearchAction: the site has no working search functionality.
       },
+      {
+        // Mirrors the EN copy in src/components/Sections/FAQ.tsx -- keep in sync if
+        // that content changes. Per Google's guidance, only mark up FAQ content that
+        // is genuinely visible on the page (it is, in the #faq accordion section).
+        '@type': 'FAQPage',
+        '@id': `${SITE_URL}/#faq`,
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'What age groups do you accept?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'We welcome children from Nursery 1 (around age 2.5) through to Class 6, covering the full nursery and primary journey.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What language(s) is teaching done in?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'NSBNPS Mokindi is fully bilingual: lessons are taught in both English and French, so every child graduates confident in both languages.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'How do I apply for admission?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: "Fill out the Admissions form on the site with your child's details, or call the admin team directly for guidance through the process.",
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What documents will I need?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Requirements can vary by grade level. Contact the admissions office for the exact document checklist for your child\u2019s intended class.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What are the current school fees?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Fees depend on the grade level and are updated each academic year. Contact the school directly by phone or email for the current fee schedule.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Do you offer transport or a meal program?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Contact the school directly to ask about transport and canteen arrangements for the current term, as these can vary.',
+            },
+          },
+        ],
+      },
     ],
   };
 

@@ -30,5 +30,6 @@ export const NAV_LINKS = [
   { label_en: "Academics", label_fr: "Académique", href: "#academics" },
   { label_en: "Admissions", label_fr: "Admissions", href: "#admissions" },
   { label_en: "Gallery", label_fr: "Galerie", href: "#gallery" },
+  { label_en: "FAQ", label_fr: "FAQ", href: "#faq" },
   { label_en: "Contact", label_fr: "Contact", href: "#contact" },
 ];

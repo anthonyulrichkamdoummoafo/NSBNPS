@@ -17,7 +17,9 @@ import Academics from './components/Sections/Academics';
 import Admissions from './components/Sections/Admissions';
 import Gallery from './components/Sections/Gallery';
 import Stats from './components/Sections/Stats';
+import FAQ from './components/Sections/FAQ';
 import Contact from './components/Sections/Contact';
+import WhatsAppButton from './components/WhatsAppButton';
 import { useLanguage } from './context/LanguageContext';
 import { ArrowDown, Check } from 'lucide-react';
 
@@ -114,8 +116,11 @@ export default function App() {
         <Academics />
         <Admissions />
         <Gallery />
+        <FAQ />
         <Contact />
       </main>
+
+      <WhatsAppButton />
 
       {/* Trust Badge Floating */}
       <div className="fixed bottom-8 left-8 z-[100] hidden lg:block pointer-events-none">

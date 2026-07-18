@@ -109,6 +109,15 @@ export const analytics = {
       label: location,
     });
   },
+
+  trackSocialInteraction: (network: string, action: string) => {
+    trackEvent({
+      action: 'social_interaction',
+      category: 'social',
+      label: `${network}_${action}`,
+      custom_parameters: { social_network: network, social_action: action },
+    });
+  },
 };
 
 declare global {
