@@ -27,9 +27,15 @@ export default function App() {
   const { lang, t } = useLanguage();
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-blue-100 selection:text-blue-900">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[300] focus:px-6 focus:py-3 focus:bg-uniform-red focus:text-white focus:font-black focus:rounded-xl focus:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-red"
+      >
+        {lang === 'EN' ? 'Skip to main content' : 'Aller au contenu principal'}
+      </a>
       <Navbar />
 
-      <main>
+      <main id="main-content">
         {/* Cultural Pattern Header Strip */}
         <div className="h-4 toghu-border w-full fixed top-0 left-0 z-[110]" />
 

@@ -106,11 +106,31 @@ export default function Contact() {
                  <motion.form key="form" onSubmit={handleSubmit} className="space-y-6 relative z-10">
                     <h4 className="text-2xl font-serif font-black text-white mb-8">{t.contact.form_title}</h4>
                     <div className="grid md:grid-cols-2 gap-6">
-                       <input name="name" required type="text" placeholder={t.contact.form_name} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
-                       <input name="email" required type="email" placeholder="Email" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
+                       <div className="space-y-2">
+                         <label htmlFor="contact-name" className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">
+                           {t.contact.form_name} <span className="text-uniform-red" aria-hidden="true">*</span>
+                         </label>
+                         <input id="contact-name" name="name" required type="text" placeholder={t.contact.form_name} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-uniform-red focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy focus:border-uniform-red transition-all" />
+                       </div>
+                       <div className="space-y-2">
+                         <label htmlFor="contact-email" className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">
+                           {t.contact.form_email} <span className="text-uniform-red" aria-hidden="true">*</span>
+                         </label>
+                         <input id="contact-email" name="email" required type="email" placeholder="email@example.com" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-uniform-red focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy focus:border-uniform-red transition-all" />
+                       </div>
                     </div>
-                    <input name="subject" type="text" placeholder={lang === 'EN' ? "Subject" : "Sujet"} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
-                    <textarea name="message" required rows={4} placeholder={t.contact.form_msg} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-uniform-red transition-all" />
+                    <div className="space-y-2">
+                      <label htmlFor="contact-subject" className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">
+                        {t.contact.form_subject} <span className="text-slate-500 normal-case font-medium">({lang === 'EN' ? 'optional' : 'facultatif'})</span>
+                      </label>
+                      <input id="contact-subject" name="subject" type="text" placeholder={lang === 'EN' ? "What's this about?" : "De quoi s'agit-il ?"} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-uniform-red focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy focus:border-uniform-red transition-all" />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="contact-message" className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">
+                        {t.contact.form_msg} <span className="text-uniform-red" aria-hidden="true">*</span>
+                      </label>
+                      <textarea id="contact-message" name="message" required rows={4} placeholder={t.contact.form_msg} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-uniform-red focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy focus:border-uniform-red transition-all" />
+                    </div>
 
                     {formState === 'error' && (
                       <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-200 text-sm font-medium">
@@ -121,7 +141,7 @@ export default function Contact() {
 
                     <button
                       disabled={formState === 'submitting'}
-                      className="w-full bg-uniform-red text-white font-black py-5 rounded-xl flex items-center justify-center gap-3 hover:bg-white hover:text-slate-900 transition-all shadow-xl shadow-uniform-red/10 disabled:opacity-70"
+                      className="w-full bg-uniform-red text-white font-black py-5 rounded-xl flex items-center justify-center gap-3 hover:bg-white hover:text-slate-900 transition-all shadow-xl shadow-uniform-red/10 disabled:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy"
                     >
                       {formState === 'submitting' ? (
                         <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />

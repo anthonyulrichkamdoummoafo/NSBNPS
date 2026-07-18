@@ -103,6 +103,15 @@ export default function Gallery() {
                   alt={item.title} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
+                {/* Persistent small badge: visible without hover, so touch devices see the tap affordance */}
+                <div className="absolute top-3 right-3 w-8 h-8 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none">
+                   <Maximize2 className="w-3.5 h-3.5" />
+                </div>
+                {/* Persistent bottom gradient sliver with title, always visible at low opacity so touch users
+                    know there's content here without needing a hover state */}
+                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/70 to-transparent group-hover:opacity-0 transition-opacity duration-300 pointer-events-none flex items-end p-4">
+                   <h4 className="text-white text-sm font-black truncate">{item.title}</h4>
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
                    <span className="text-blue-400 text-xs font-black uppercase tracking-widest mb-2">{item.category}</span>
                    <h4 className="text-white text-2xl font-black">{item.title}</h4>

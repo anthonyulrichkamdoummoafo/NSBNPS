@@ -123,12 +123,14 @@ export default function Admissions() {
                     >
                       <div className="grid md:grid-cols-2 gap-6">
                          <div className="space-y-2">
-                           <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_student}</label>
-                           <input name="student_name" required type="text" placeholder={lang === 'EN' ? "Full legal name" : "Nom complet"} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
+                           <label htmlFor="adm-student" className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">
+                             {t.admissions.form_student} <span className="text-uniform-red" aria-hidden="true">*</span>
+                           </label>
+                           <input id="adm-student" name="student_name" required type="text" placeholder={lang === 'EN' ? "Full legal name" : "Nom complet"} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 focus-visible:ring-2 focus-visible:ring-uniform-red focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy transition-all outline-none text-white font-medium" />
                          </div>
                          <div className="space-y-2">
-                           <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_grade}</label>
-                           <select name="target_grade" className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium appearance-none">
+                           <label htmlFor="adm-grade" className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_grade}</label>
+                           <select id="adm-grade" name="target_grade" className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 focus-visible:ring-2 focus-visible:ring-uniform-red focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy transition-all outline-none text-white font-medium appearance-none">
                               <option className="text-slate-900">Nursery 1 / Maternelle 1</option>
                               <option className="text-slate-900">Nursery 2 / Maternelle 2</option>
                               <option className="text-slate-900">Class 1 / SIL</option>
@@ -142,24 +144,30 @@ export default function Admissions() {
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_parent}</label>
-                        <input name="parent_name" required type="text" placeholder={lang === 'EN' ? "First and last name" : "Prénom et nom"} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
+                        <label htmlFor="adm-parent" className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">
+                          {t.admissions.form_parent} <span className="text-uniform-red" aria-hidden="true">*</span>
+                        </label>
+                        <input id="adm-parent" name="parent_name" required type="text" placeholder={lang === 'EN' ? "First and last name" : "Prénom et nom"} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 focus-visible:ring-2 focus-visible:ring-uniform-red focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy transition-all outline-none text-white font-medium" />
                       </div>
 
                       <div className="grid md:grid-cols-2 gap-6">
                          <div className="space-y-2">
-                           <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_phone}</label>
-                           <input name="phone" required type="tel" placeholder="+237 ..." className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
+                           <label htmlFor="adm-phone" className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">
+                             {t.admissions.form_phone} <span className="text-uniform-red" aria-hidden="true">*</span>
+                           </label>
+                           <input id="adm-phone" name="phone" required type="tel" placeholder="+237 ..." className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 focus-visible:ring-2 focus-visible:ring-uniform-red focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy transition-all outline-none text-white font-medium" />
                          </div>
                          <div className="space-y-2">
-                           <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_email}</label>
-                           <input name="email" type="email" placeholder="email@example.com" className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
+                           <label htmlFor="adm-email" className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">
+                             {t.admissions.form_email} <span className="text-slate-500 normal-case font-medium">({lang === 'EN' ? 'optional' : 'facultatif'})</span>
+                           </label>
+                           <input id="adm-email" name="email" type="email" placeholder="email@example.com" className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 focus-visible:ring-2 focus-visible:ring-uniform-red focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy transition-all outline-none text-white font-medium" />
                          </div>
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_info}</label>
-                        <textarea name="additional_info" rows={3} placeholder={lang === 'EN' ? "Tell us about your child's needs..." : "Parlez-nous des besoins de votre enfant..."} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 transition-all outline-none text-white font-medium" />
+                        <label htmlFor="adm-info" className="text-xs font-black text-slate-400 uppercase tracking-widest px-2">{t.admissions.form_info}</label>
+                        <textarea id="adm-info" name="additional_info" rows={3} placeholder={lang === 'EN' ? "Tell us about your child's needs..." : "Parlez-nous des besoins de votre enfant..."} className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-uniform-red focus:bg-white/10 focus-visible:ring-2 focus-visible:ring-uniform-red focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy transition-all outline-none text-white font-medium" />
                       </div>
 
                       {formState === 'error' && (
@@ -173,7 +181,7 @@ export default function Admissions() {
 
                       <button 
                         disabled={formState === 'submitting'}
-                        className="w-full bg-uniform-red text-white font-black py-5 rounded-xl shadow-xl shadow-uniform-red/20 hover:bg-white hover:text-slate-900 active:scale-95 transition-all flex items-center justify-center gap-3"
+                        className="w-full bg-uniform-red text-white font-black py-5 rounded-xl shadow-xl shadow-uniform-red/20 hover:bg-white hover:text-slate-900 active:scale-95 transition-all flex items-center justify-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-uniform-navy"
                       >
                         {formState === 'submitting' ? (
                           <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
