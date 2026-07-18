@@ -45,7 +45,7 @@ export default function Navbar() {
               NSBNPS
             </span>
             <span className="text-[10px] font-black text-cm-green uppercase tracking-widest leading-none mt-1">
-              Mokindi
+              Bilingual School
             </span>
           </div>
         </a>

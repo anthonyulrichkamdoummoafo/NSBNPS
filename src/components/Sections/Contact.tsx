@@ -44,7 +44,7 @@ export default function Contact() {
               <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-2xl group-hover:rotate-6 transition-transform overflow-hidden border-2 border-white/20">
                 <img src="input_file_3.png" alt="NSBNPS Logo" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
-              <h2 className="text-3xl font-serif font-black text-white">NSBNPS Mokindi</h2>
+              <h2 className="text-3xl font-serif font-black text-white">NSBNPS</h2>
             </div>
             
             <h3 className="text-6xl font-serif font-black text-white leading-[0.9] mb-12 max-w-md">
@@ -137,7 +137,7 @@ export default function Contact() {
 
         <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
            <p className="text-slate-500 text-sm font-medium">
-              &copy; {new Date().getFullYear()} NSBNPS Mokindi. Limbe, {lang === 'EN' ? 'Cameroon' : 'Cameroun'}.
+              &copy; {new Date().getFullYear()} NSBNPS. Limbe, {lang === 'EN' ? 'Cameroon' : 'Cameroun'}.
            </p>
            
            <div className="flex gap-8">

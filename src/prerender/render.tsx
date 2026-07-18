@@ -29,7 +29,7 @@ export function renderApp(): string {
 export function renderHead(): string {
   const title = `${SCHOOL_INFO.shortName} | Bilingual Nursery & Primary School in Limbe, Cameroon`;
   const description =
-    'New Standard Bilingual Nursery and Primary School (NSBNPS) Mokindi in Isokolo Village, Limbe, Cameroon. Quality bilingual (English/French) education from Nursery to Class 6, rooted in discipline and Cameroonian values. Admissions open for 2026/2027.';
+    'New Standard Bilingual Nursery and Primary School (NSBNPS) in Isokolo Mokindi Village, Limbe, Cameroon. Quality bilingual (English/French) education from Nursery to Class 6, rooted in discipline and Cameroonian values. Admissions open for 2026/2027.';
   const ogImage = `${SITE_URL}/graduate.jpg`;
 
   const jsonLd = {
@@ -86,7 +86,7 @@ export function renderHead(): string {
             name: 'What language(s) is teaching done in?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'NSBNPS Mokindi is fully bilingual: lessons are taught in both English and French, so every child graduates confident in both languages.',
+              text: 'NSBNPS is fully bilingual: lessons are taught in both English and French, so every child graduates confident in both languages.',
             },
           },
           {

@@ -14,8 +14,8 @@ export default function WhatsAppButton() {
 
   const phoneDigits = toWhatsAppDigits(SCHOOL_INFO.contact.phone[0]);
   const message = lang === 'EN'
-    ? "Hello! I'd like to know more about admissions at NSBNPS Mokindi."
-    : "Bonjour ! J'aimerais en savoir plus sur les admissions à NSBNPS Mokindi.";
+    ? "Hello! I'd like to know more about admissions at NSBNPS."
+    : "Bonjour ! J'aimerais en savoir plus sur les admissions à NSBNPS.";
   const href = `https://wa.me/${phoneDigits}?text=${encodeURIComponent(message)}`;
 
   return (

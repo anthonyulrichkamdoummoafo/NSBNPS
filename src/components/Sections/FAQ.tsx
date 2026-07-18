@@ -15,7 +15,7 @@ export default function FAQ() {
     },
     {
       q: "What language(s) is teaching done in?",
-      a: "NSBNPS Mokindi is fully bilingual: lessons are taught in both English and French, so every child graduates confident in both languages.",
+      a: "NSBNPS is fully bilingual: lessons are taught in both English and French, so every child graduates confident in both languages.",
     },
     {
       q: "How do I apply for admission?",
@@ -40,7 +40,7 @@ export default function FAQ() {
     },
     {
       q: "Dans quelle(s) langue(s) l'enseignement est-il dispensé ?",
-      a: "NSBNPS Mokindi est entièrement bilingue : les cours sont dispensés en anglais et en français, afin que chaque enfant soit à l'aise dans les deux langues.",
+      a: "NSBNPS est entièrement bilingue : les cours sont dispensés en anglais et en français, afin que chaque enfant soit à l'aise dans les deux langues.",
     },
     {
       q: "Comment puis-je inscrire mon enfant ?",
